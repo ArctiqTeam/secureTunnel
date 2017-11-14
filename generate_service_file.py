@@ -1,7 +1,7 @@
 #!/bin/python
 from subprocess import call
 
-def file_create(server, user):
+def file_create(server, port, user):
     """ Create the service file
     with user input.
     """
@@ -16,12 +16,12 @@ def file_create(server, user):
     Documentation=https://github.com/ArctiqTeam/secureTunnel
 
     [Service]
-    ExecStart=/usr/bin/ssh -NT -L 8001:{}:80 {}@{}
+    ExecStart=/usr/bin/ssh -NT -L 8001:{}:{} {}@{}
     RestartSec=5
     Restart=always
 
     [Install]
-    WantedBy=multi-user.target""".format(server, user, server))
+    WantedBy=multi-user.target""".format(server, port, user, server))
 
     file.close()
     print("[OK]")
@@ -35,9 +35,10 @@ def main():
 
     # Ask the user for some details
     server = raw_input("Target host: ")
+    port = raw_input("Target port: ")
     user = raw_input("User to login as: ")
     
-    file_create(server, user)
+    file_create(server, port, user)
 
     # Move service file to proper location
     print("Moving service file to '/etc/systemd/system/'..."),
