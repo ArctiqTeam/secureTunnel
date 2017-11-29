@@ -18,7 +18,7 @@ systemctl status sercure-tunnel.service
 ```
 The tunnel can also be verified by trying to pull a file that the target host is serving on the web (ex. the target host in the example has `bootstrap.py` located at `/var/www/html/pub/`:
 ```
-curl -O localhost:8000/pub/bootstrap.py
+curl -O localhost:8001/pub/bootstrap.py
 ```
 
 ## SSH Keys
